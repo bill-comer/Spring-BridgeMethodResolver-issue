@@ -1,4 +1,6 @@
 I think I might have managed to reproduce this issue but instead of using the @Transactional annotation (which is fine) I am using my own annotation.
+
+original issue raised here http://forum.springsource.org/showthread.php?37218-BridgeMethodResolver-Unable-to-locate-bridged-method&highlight=bridgemethodresolver
  
 I am getting the following stacktrace:
 Caused by: java.lang.IllegalStateException: Unable to locate bridged method for bridge method 'public final java.lang.Object uk.co.bmrtest.bridgemethodresolvertest.BMRDomainObjectDaoHibernate$$EnhancerByCGLIB$$7fe75067.makePersistent(java.lang.Object)'
