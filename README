@@ -1,0 +1,18 @@
+I think I might have managed to reproduce this issue but instead of using the @Transactional annotation (which is fine) I am using my own annotation.
+ 
+I am getting the following stacktrace:
+Caused by: java.lang.IllegalStateException: Unable to locate bridged method for bridge method 'public final java.lang.Object uk.co.bmrtest.bridgemethodresolvertest.BMRDomainObjectDaoHibernate$$EnhancerByCGLIB$$7fe75067.makePersistent(java.lang.Object)'
+                at rg.springframework.core.BridgeMethodResolver.findBridgedMethod(BridgeMethodResolver.java:86)
+                at org.springframework.aop.support.AopUtils.getMostSpecificMethod(AopUtils.java:166)
+                at org.springframework.aop.aspectj.AspectJExpressionPointcut.matches(AspectJExpressionPointcut.java:245)
+ 
+I have uploaded a suite of test code pretty well as simple as I can make it that reproduces the issue to github at https://github.com/bill-comer/Spring-BridgeMethodResolver-issue/
+ 
+The only files I have missed out are: test-parms-db.xml" & parms-db-master.xml which are standard hibernate set up stuff. No DB is actually needed for the test but the hibernate needs configuring.
+ 
+I am using Spring 2.5.6 & java 6.
+ 
+I can do two things to make the test pass:
+1.            Remove @BMRAudit from BMRDomainObjectDaoHibernate
+2.            Remove public T makePersistent(T aEntity) from BMRGenericDaoHibernate & BMRGenericDao
+3.   By adding a method on the service to call the Dao & putting the @BMRAudit method on this
